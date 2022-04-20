@@ -13,16 +13,14 @@ const W12MForm = () => {
 	const [numberOfBeings,setNumberOfBeings]=useState<string>('');
 	const [whatIs2Plus2,setWhatis2Plus2]=useState<string>('Not 4');
 	const [reasonForSparing,setReasonForSparing]=useState<string>('');
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
 		console.log(`speciesName: ${speciesName}, planetName: ${planetName}, 
 		numberOfBeings: ${numberOfBeings}, whatIs2Plus2: ${whatIs2Plus2}, 
 		reasonForSparing: ${reasonForSparing}`);
   	};
 	
 
-	return (
-		<form onSubmit={handleSubmit}>
+	return (		
 			<section className='w12MForm'>
 				<W12MHeader />
 				{
@@ -32,11 +30,10 @@ const W12MForm = () => {
 						<NumberOfBeings numberOfBeings={numberOfBeings} onChangeNumberOfBeings={(e:any)=>setNumberOfBeings(e.target.value)}/>
 						<WhatIs2Plus2 whatIs2Plus2={whatIs2Plus2} onChangeWhatis2Plus2={(e:any)=>setWhatis2Plus2(e.target.value)}/>
 						<ReasonForSparing reasonForSparing={reasonForSparing} onChangeReasonForSparing={(e:any)=>setReasonForSparing(e.target.value)}/>
+						<p><button type = 'submit' onClick={handleSubmit}>Form submit</button></p>
 					</>
 				}
 			</section>
-			<button type = 'submit'>Form submit</button>
-		</form>
 	);
 };
 
