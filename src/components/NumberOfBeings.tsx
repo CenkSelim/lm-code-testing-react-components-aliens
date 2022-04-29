@@ -1,4 +1,4 @@
-interface NumberOfBeingsProps {
+export interface NumberOfBeingsProps {
     numberOfBeings: string;
     onChangeNumberOfBeings: (e:React.ChangeEvent<HTMLInputElement>)=>void;
 };

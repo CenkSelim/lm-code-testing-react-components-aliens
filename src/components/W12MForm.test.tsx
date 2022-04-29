@@ -31,5 +31,5 @@ it(`Given a form is rendered,
 	}
 
 	expect(logSpy).toHaveBeenCalledTimes(1);
-	expect(logSpy).toContain('Earth');
+	expect(logSpy).toBeCalledWith('speciesName: humans, planetName: Earth, \n\t\tnumberOfBeings: , whatIs2Plus2: Not 4, \n\t\treasonForSparing: ');
 });
