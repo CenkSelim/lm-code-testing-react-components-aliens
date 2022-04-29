@@ -1,4 +1,4 @@
-interface WhatIs2Plus2Props {
+export interface WhatIs2Plus2Props {
     whatIs2Plus2 : string;
     onChangeWhatis2Plus2 : (e:React.ChangeEvent<HTMLSelectElement>)=>void;
 }

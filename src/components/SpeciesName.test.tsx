@@ -7,7 +7,7 @@ describe('SpeciesName component', () => {
 		When the component is rendered,
 		Then the appropriate data should be present`, () => {
 		const requiredProps: SpeciesNameProps = {
-      speciesName: "human",
+      		speciesName: "human",
 			onChangeSpeciesName: () => {},
 		};
 		render(<SpeciesName {...requiredProps} />);
