@@ -30,7 +30,7 @@ describe('NumberOfBeings component', () => {
 
 		// Extract the textbox component
 		const textbox = screen.getByRole('textbox');
-		// Simulate typing 'Human'
+		// Simulate typing '17'
 		userEvent.type(textbox, '17'); 
 		expect(mockEntryHandler.mock.calls.length).toBe(2);
 		expect(mockEntryHandler.mock.results[0].value).toBe('1');
