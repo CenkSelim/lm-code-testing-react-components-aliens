@@ -1,4 +1,4 @@
-interface ReasonForSparingProps {
+export interface ReasonForSparingProps {
     reasonForSparing: string;
     onChangeReasonForSparing: (e:React.ChangeEvent<HTMLTextAreaElement>)=>void;
 }
