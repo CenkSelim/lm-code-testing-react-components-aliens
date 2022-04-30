@@ -1,3 +1,5 @@
+import ErrorMessage from "./ErrorMessage";
+
 export interface ReasonForSparingProps {
     reasonForSparing: string;
     onChangeReasonForSparing: (e:React.ChangeEvent<HTMLTextAreaElement>)=>void;
@@ -7,6 +9,7 @@ const ReasonForSparing : React.FC<ReasonForSparingProps> = ({reasonForSparing,on
     <>
         <label htmlFor='reasonForSparing'>Reason for sparing : 
         <textarea id='reasonForSparing' value={reasonForSparing} onChange={onChangeReasonForSparing}/></label>
+        
     </>
 );
 
