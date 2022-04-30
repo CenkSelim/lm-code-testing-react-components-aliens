@@ -1,5 +1,5 @@
 export interface ErrorMessageProps {
-    errorMessage:string;
+    errorMessage:string|undefined;
 };
 
 const arrorMessageStyle: React.CSSProperties = {
