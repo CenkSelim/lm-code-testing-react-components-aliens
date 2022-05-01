@@ -14,7 +14,8 @@ const W12MForm = () => {
 	const [whatIs2Plus2,setWhatis2Plus2]=useState<string>('Not 4');
 	const [reasonForSparing,setReasonForSparing]=useState<string>('');
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		//  uncomment to stop form reload e.preventDefault();
+		//  uncomment to stop form reload 
+		e.preventDefault();
 		console.log(`speciesName: ${speciesName}, planetName: ${planetName}, 
 		numberOfBeings: ${numberOfBeings}, whatIs2Plus2: ${whatIs2Plus2}, 
 		reasonForSparing: ${reasonForSparing}`);
