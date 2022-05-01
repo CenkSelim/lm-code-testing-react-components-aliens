@@ -89,8 +89,8 @@ describe('PlanetName component entry validattion', () => {
 	});
 
 	it(`Given the required props,
-		When the component is rendered the entry with valid data no message will be 
-		Then the appropriate data should be present`, async () => {
+		When the component is rendered the entry with valid data 
+		Then no message should be present`, async () => {
 		const requiredProps: PlanetNameProps = {
       		planetName: "Earth",
 			onChangePlanetName: () => {},

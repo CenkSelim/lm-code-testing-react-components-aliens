@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ReasonForSparing, {ReasonForSparingProps} from "./ReasonForSparing";
+import ReasonForSparing, {ReasonForSparingErrorMessage, ReasonForSparingProps} from "./ReasonForSparing";
 
 describe('ReasonForSparing component', () => {
 	it(`Given the required props,
@@ -41,5 +41,54 @@ describe('ReasonForSparing component', () => {
         expect(mockEntryHandler.mock.results[5].value).toBe('.');
         expect(mockEntryHandler.mock.results[6].value).toBe('.');
         expect(mockEntryHandler.mock.results[7].value).toBe('.');
+	});
+});
+
+
+describe('SpeciesName component entry validattion', () => {	
+
+	it(`Given the required props,
+		When the component is rendered the entry with lesss than 17 characters
+		Then the appropriate error message should be present`, async () => {
+		const requiredProps: ReasonForSparingProps = {
+      		reasonForSparing: "",
+			onChangeReasonForSparing: () => {},
+		};
+		render(<ReasonForSparing {...requiredProps} />);	
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, 'H'); 	
+    	expect(await screen.findByText(ReasonForSparingErrorMessage)).toBeInTheDocument();
+	});
+
+	it(`Given the required props,
+		When the component is rendered the entry with more than 153 characters
+		Then the appropriate error message should be present`, async () => {
+		const requiredProps: ReasonForSparingProps = {
+      		reasonForSparing: "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+			onChangeReasonForSparing: () => {},
+		};
+		render(<ReasonForSparing {...requiredProps} />);	
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, '!'); 	
+    	expect(await screen.findByText(ReasonForSparingErrorMessage)).toBeInTheDocument();
+	});
+
+	it(`Given the required props,
+		When the component is rendered the entry with valid data  
+		Then no message should be present`, async () => {
+		const requiredProps: ReasonForSparingProps = {
+      		reasonForSparing: "There has to be a better way than this.",
+			onChangeReasonForSparing: () => {},
+		};
+		render(<ReasonForSparing {...requiredProps} />);
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, 'matey'); 	
+    	expect(screen.queryByText(ReasonForSparingErrorMessage)).not.toBeInTheDocument();
 	});
 });
