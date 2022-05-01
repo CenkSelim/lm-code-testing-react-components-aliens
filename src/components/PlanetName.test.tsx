@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import PlanetName, {PlanetNameProps} from "./PlanetName";
+import PlanetName, {PlanetNameErrorMessage, PlanetNameProps} from "./PlanetName";
 
 describe('PlanetName component', () => {
 	it(`Given the required props,
@@ -38,5 +38,69 @@ describe('PlanetName component', () => {
 		expect(mockEntryHandler.mock.results[2].value).toBe('r');
 		expect(mockEntryHandler.mock.results[3].value).toBe('t');
 		expect(mockEntryHandler.mock.results[4].value).toBe('h');
+	});
+});
+
+describe('PlanetName component entry validattion', () => {	
+
+	it(`Given the required props,
+		When the component is rendered the entry with lesss than 2 characters
+		Then the appropriate error message should be present`, async () => {
+		const requiredProps: PlanetNameProps = {
+      		planetName: "",
+			onChangePlanetName: () => {},
+		};
+		render(<PlanetName {...requiredProps} />);	
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, 'E'); 
+    	expect(await screen.findByText(PlanetNameErrorMessage)).toBeInTheDocument();
+	});
+
+	it(`Given the required props,
+		When the component is rendered the entry with more than 49 characters
+		Then the appropriate error message should be present`, async () => {
+		const requiredProps: PlanetNameProps = {
+      		planetName: "This the planet Earth third rock from the sun Ok!!!!!",
+			onChangePlanetName: () => {},
+		};
+		render(<PlanetName {...requiredProps} />);	
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, 'This the planet Earth third rock from the sun Ok!!!!!'); 	
+    	expect(await screen.findByText(PlanetNameErrorMessage)).toBeInTheDocument();
+	});
+
+	it(`Given the required props,
+		When the component is rendered the entry with special characters
+		Then the appropriate error message should be present`, async () => {
+		const requiredProps: PlanetNameProps = {
+      		planetName: "Mars$$%%",
+			onChangePlanetName: () => {},
+		};
+		render(<PlanetName {...requiredProps} />);	
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, 'Mars$$%%'); 	
+    	expect(await screen.findByText(PlanetNameErrorMessage)).toBeInTheDocument();
+	});
+
+	it(`Given the required props,
+		When the component is rendered the entry with valid data no message will be 
+		Then the appropriate data should be present`, async () => {
+		const requiredProps: PlanetNameProps = {
+      		planetName: "Earth",
+			onChangePlanetName: () => {},
+		};
+
+		render(<PlanetName {...requiredProps} />);
+		// Extract the textbox component
+		const textbox = screen.getByRole('textbox');
+		// Simulate typing to fire event
+		userEvent.type(textbox, 'Earth'); 	
+    	expect(screen.queryByText(PlanetNameErrorMessage)).not.toBeInTheDocument();
 	});
 });

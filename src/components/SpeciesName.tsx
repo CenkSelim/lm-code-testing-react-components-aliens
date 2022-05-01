@@ -6,20 +6,22 @@ export interface SpeciesNameProps {
     onChangeSpeciesName:(e:React.ChangeEvent<HTMLInputElement>)=>void;
 }
 
+export const SpeciesNameErrorMessage = "Must be between 3 and 23 characters. No numbers or special characters allowed!";
+
 const SpeciesName : React.FC<SpeciesNameProps> = ({speciesName,onChangeSpeciesName}) => {
 
         const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
 
 		const validate : (value : string) => string | undefined = (value) => {
-			if(value.length < 3 || value.length >23){
-                return "Must be between 3 and 23 characters. No numbers or special characters allowed!";
+            if(value.length < 3 || value.length >23 || 
+                value.match(/[0-9`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/)){
+                return SpeciesNameErrorMessage;
             }
 			return undefined;
 		}
   
     return (
-
-        <p>
+        <>
             <label htmlFor='speciesName'>Species Name: </label>
             <input id='speciesName' 
                 type='text' 
@@ -31,7 +33,7 @@ const SpeciesName : React.FC<SpeciesNameProps> = ({speciesName,onChangeSpeciesNa
 				    }
                 }/>
             <ErrorMessage errorMessage={errorMessage}/>
-        </p>
+        </>
     );
 };
 

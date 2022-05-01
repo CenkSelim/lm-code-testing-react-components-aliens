@@ -12,7 +12,7 @@ describe('ErrorMessage Component', () => {
         };
 
         render (<ErrorMessage {...requiredProps}/>);
-        expect(screen.getByText(requiredProps.errorMessage)).toBeInTheDocument();
+        expect(screen.getByText(requiredProps.errorMessage as string)).toBeInTheDocument();
         
     });   
 });
